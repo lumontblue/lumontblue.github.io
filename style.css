@@ -1,0 +1,12 @@
+/* Estilos para el body */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita barras de desplazamiento */
+}
+
+/* El ID del div contenedor del mapa */
+#map {
+    width: 100vw;   /* 100% del ancho de la vista */
+    height: 100vh;  /* 100% de la altura de la vista */
+}
