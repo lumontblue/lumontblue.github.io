@@ -15,38 +15,44 @@ const geojsonUrl = './dpa_comuna_subdere_4.geojson';
 // 3. Función para cargar y mostrar el GeoJSON
 fetch(geojsonUrl)
     .then(response => {
-        // Verifica si la respuesta es exitosa
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
         }
-        // Convierte la respuesta a formato JSON
         return response.json();
     })
     .then(data => {
-        // Asegúrate de que 'data' sea un objeto GeoJSON válido (FeatureCollection)
-
-        // Crea una capa GeoJSON y la añade al mapa
+        
         const geoJsonLayer = L.geoJSON(data, {
-            // Aquí puedes definir funciones opcionales para personalizar la visualización
-
-            // Función para estilizar las geometrías (opcional)
+            
             style: function (feature) {
                 return {
-                    fillColor: '#0070c0', // Color de relleno azul
+                    fillColor: '#0070c0', 
                     weight: 2,
                     opacity: 1,
-                    color: 'white', // Color del borde
+                    color: 'white', 
                     fillOpacity: 0.5
                 };
             },
 
-            // Función para añadir pop-ups (opcional)
+            // --- ESTA ES LA CLAVE: Añadir Tooltips y Popups ---
             onEachFeature: function (feature, layer) {
                 if (feature.properties && feature.properties.nombre) {
-                    // Crea un pop-up que muestre la propiedad 'nombre'
-                    layer.bindPopup("<b>Nombre:</b> " + feature.properties.nombre);
+                    const nombre = feature.properties.nombre;
+
+                    // 1. Añade el Pop-up (al hacer clic)
+                    // (Esta parte ya estaba para que no la pierdas)
+                    layer.bindPopup("<b>Nombre:</b> " + nombre);
+
+                    // 2. Añade el Tooltip (al pasar el mouse)
+                    layer.bindTooltip(nombre, {
+                        permanent: false, // Desaparece cuando el mouse se va
+                        direction: 'center', // Aparece centrado sobre la geometría
+                        className: 'geojson-tooltip' // Opcional: clase para CSS personalizado
+                    });
                 }
             }
+            // ---------------------------------------------------
+
         }).addTo(map);
 
         // Opcional: Centrar el mapa a la extensión de los datos cargados
@@ -56,5 +62,4 @@ fetch(geojsonUrl)
     })
     .catch(error => {
         console.error('Hubo un error al cargar el GeoJSON:', error);
-        // Muestra un mensaje de error en la consola o en el mapa si es necesario
     });
