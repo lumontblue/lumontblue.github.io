@@ -10,7 +10,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // --- URL del archivo GeoJSON en GitHub Pages ---
 // IMPORTANTE: Reemplaza esta URL por la URL REAL de tu archivo GeoJSON.
-const geojsonUrl = 'TU_URL_DE_GITHUB_PAGES_AQUI/dpa_region_subdere_4_clean.geojson';
+const geojsonUrl = './dga_comuna.geojson';
 
 // 3. Función para cargar y mostrar el GeoJSON
 fetch(geojsonUrl)
