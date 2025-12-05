@@ -10,3 +10,19 @@ body {
     width: 100vw;   /* 100% del ancho de la vista */
     height: 100vh;  /* 100% de la altura de la vista */
 }
+
+/* NUEVOS ESTILOS PARA EL SELECT */
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Asegura que esté por encima del mapa */
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#map-selector {
+    padding: 5px;
+}
